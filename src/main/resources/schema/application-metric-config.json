@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "config": {
+      "type": "object",
+      "properties": {
+        "applicationAliasMap": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/alias"
+          }
+        },
+        "publicMessageTopics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/topic"
+          }
+        },
+        "applicationTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/types"
+          }
+        }
+      },
+      "required": [
+        "applicationAliasMap",
+        "publicMessageTopics"
+      ]
+    }
+  },
+  "required": [
+    "config"
+  ],
+  "definitions": {
+    "alias": {
+      "description": "Parameters for a single alias",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "the user name from the client"
+        },
+        "name": {
+          "type": "string",
+          "description": "the alias to be used fro metric"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "uuid"
+      ]
+    },
+    "topic": {
+      "description": "Parameters for public message",
+      "type": "string"
+    },
+    "types": {
+      "description": "List of application types, such as mapem",
+      "type": "string"
+    }
+  }
+}
