@@ -41,6 +41,6 @@ public final class HiveMQBindingsModule_ProvideEventRegistryFactory implements F
     }
 
     public static EventRegistry provideEventRegistry(HiveMQBindingsModule instance) {
-        return (EventRegistry)Preconditions.checkNotNullFromProvides(instance.provideEventRegistry());
+        return (EventRegistry) Preconditions.checkNotNullFromProvides(instance.provideEventRegistry());
     }
 }

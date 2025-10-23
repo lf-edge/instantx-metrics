@@ -43,7 +43,8 @@ public class AppMetricsMain implements ExtensionMain {
     public void extensionStart(@NotNull ExtensionStartInput input, @NotNull ExtensionStartOutput output) {
         try {
             ExtensionInformation extensionInformation = input.getExtensionInformation();
-            ApplicationMetricsExtension extension = DaggerApplicationMetricsExtension.builder().hiveMQBindingsModule(new HiveMQBindingsModule(input)).build();
+            ApplicationMetricsExtension extension = DaggerApplicationMetricsExtension.builder()
+                    .hiveMQBindingsModule(new HiveMQBindingsModule(input)).build();
             this.initializer = extension.initializer();
             this.initializer.start();
             log.info("Started PoC " + extensionInformation.getName() + ":" + extensionInformation.getVersion());

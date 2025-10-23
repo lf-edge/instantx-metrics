@@ -41,6 +41,6 @@ public final class ConfigurationModule_JsonMapperFactory implements Factory<Obje
     }
 
     public static ObjectMapper jsonMapper(ConfigurationModule instance) {
-        return (ObjectMapper)Preconditions.checkNotNullFromProvides(instance.jsonMapper());
+        return (ObjectMapper) Preconditions.checkNotNullFromProvides(instance.jsonMapper());
     }
 }

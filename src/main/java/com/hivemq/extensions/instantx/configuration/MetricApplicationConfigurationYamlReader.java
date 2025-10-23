@@ -76,16 +76,20 @@ public class MetricApplicationConfigurationYamlReader implements MetricApplicati
     private final List<MetricApplicationConfiguration.ConfigChangeCallback<?>> configChangeCallbacks;
 
     @Inject
-    public MetricApplicationConfigurationYamlReader(@Named("extension-home") @NotNull File extensionFolder, @NotNull ScheduledExecutorService scheduledExecutor, @NotNull SchemaValidatedYamlReaderFactory configFactory) {
+    public MetricApplicationConfigurationYamlReader(@Named("extension-home") @NotNull File extensionFolder,
+            @NotNull ScheduledExecutorService scheduledExecutor,
+            @NotNull SchemaValidatedYamlReaderFactory configFactory) {
         try {
-            this.configReader = configFactory.createReader("application-metric-configuration.yaml", "application-metric-config.json", ApplicationMetricConfig.class);
-        } catch (IOException|ProcessingException e) {
+            this.configReader = configFactory.createReader("application-metric-configuration.yaml",
+                    "application-metric-config.json", ApplicationMetricConfig.class);
+        } catch (IOException | ProcessingException e) {
             log.error("Could not read tenant configuration", e);
             throw new InvalidConfigurationException("Could not load tenant configuration");
         }
         this.aliasMap = new HashMap<>();
         Objects.requireNonNull(this.aliasMap);
-        this.aliasCache = Caffeine.newBuilder().maximumSize(100L).expireAfterWrite(Duration.ofSeconds(60L)).build(this.aliasMap::get);
+        this.aliasCache = Caffeine.newBuilder().maximumSize(100L).expireAfterWrite(Duration.ofSeconds(60L))
+                .build(this.aliasMap::get);
         this.extensionFolder = extensionFolder;
         this.appUpdatedCallbacks = new CopyOnWriteArrayList<>();
         this.configChangeCallbacks = new CopyOnWriteArrayList<>();
@@ -108,14 +112,15 @@ public class MetricApplicationConfigurationYamlReader implements MetricApplicati
         } catch (IOException e) {
             log.error("Failed to read configuration file '{}'", configFile.getPath(), e);
         } catch (ProcessingException e) {
-            log.error("Configuration file failed validation:", (Throwable)e);
+            log.error("Configuration file failed validation:", (Throwable) e);
         }
         throw new InvalidConfigurationException("Failed to read configuration");
     }
 
     @NotNull
     public Iterator<Alias> applications() {
-        return ((ApplicationMetricConfig)this.currentConfiguration.get()).getConfig().getApplicationAliasMap().iterator();
+        return ((ApplicationMetricConfig) this.currentConfiguration.get()).getConfig().getApplicationAliasMap()
+                .iterator();
     }
 
     @NotNull
@@ -125,15 +130,18 @@ public class MetricApplicationConfigurationYamlReader implements MetricApplicati
 
     @NotNull
     public List<String> publicTopics() {
-        return ((ApplicationMetricConfig)this.currentConfiguration.get()).getConfig().getPublicMessageTopics();
+        return ((ApplicationMetricConfig) this.currentConfiguration.get()).getConfig().getPublicMessageTopics();
     }
 
     @NotNull
     public Set<String> typeSet() {
-        return new HashSet<>(((ApplicationMetricConfig)this.currentConfiguration.get()).getConfig().getApplicationTypes());
+        return new HashSet<>(
+                ((ApplicationMetricConfig) this.currentConfiguration.get()).getConfig().getApplicationTypes());
     }
 
-    public <T> void addConfigChangedCallback(@NotNull MetricApplicationConfiguration.ConfigChangeCallback<T> callback) {}
+    public <T> void addConfigChangedCallback(@NotNull MetricApplicationConfiguration.ConfigChangeCallback<T> callback) {
+    }
 
-    public void addApplicationUpdatedCallback(@NotNull MetricApplicationConfiguration.AppUpdatedCallback callback) {}
+    public void addApplicationUpdatedCallback(@NotNull MetricApplicationConfiguration.AppUpdatedCallback callback) {
+    }
 }

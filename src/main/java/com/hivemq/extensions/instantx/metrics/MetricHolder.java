@@ -156,9 +156,9 @@ public class MetricHolder {
     @NotNull
     private Counter getCounter(@NotNull String app, @NotNull String topic, @NotNull String metricType) {
         List<String> levels = getTopicLevels(topic);
-        String service = (levels.isEmpty() ? "": levels.get(0));
-        String subService = (levels.isEmpty() || levels.size() < 2 ? "": levels.get(1));
-        String subServiceGroup = (levels.isEmpty() || levels.size() < 3 ? "": levels.get(2));
+        String service = (levels.isEmpty() ? "" : levels.get(0));
+        String subService = (levels.isEmpty() || levels.size() < 2 ? "" : levels.get(1));
+        String subServiceGroup = (levels.isEmpty() || levels.size() < 3 ? "" : levels.get(2));
 
         return this.metricRegistry.counter(METRIC_ROOT + app + "." + service + "." + subService + metricType);
     }
@@ -184,7 +184,7 @@ public class MetricHolder {
 
     @NotNull
     public String getAppAliasByUserName(@NotNull String uuidString) {
-        String alias = (String)this.config.applicationMap().get(uuidString);
+        String alias = (String) this.config.applicationMap().get(uuidString);
         return (alias != null) ? alias : uuidString;
     }
 
@@ -205,8 +205,8 @@ public class MetricHolder {
         if (attributeBuffer.isEmpty()) {
             attributeValue = new byte[0];
         } else {
-            attributeValue = new byte[((ByteBuffer)attributeBuffer.get()).remaining()];
-            ((ByteBuffer)attributeBuffer.get()).get(attributeValue);
+            attributeValue = new byte[((ByteBuffer) attributeBuffer.get()).remaining()];
+            ((ByteBuffer) attributeBuffer.get()).get(attributeValue);
         }
         return new String(attributeValue, StandardCharsets.UTF_8);
     }

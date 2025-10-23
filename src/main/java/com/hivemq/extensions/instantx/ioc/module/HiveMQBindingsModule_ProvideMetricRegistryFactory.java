@@ -41,6 +41,6 @@ public final class HiveMQBindingsModule_ProvideMetricRegistryFactory implements 
     }
 
     public static MetricRegistry provideMetricRegistry(HiveMQBindingsModule instance) {
-        return (MetricRegistry)Preconditions.checkNotNullFromProvides(instance.provideMetricRegistry());
+        return (MetricRegistry) Preconditions.checkNotNullFromProvides(instance.provideMetricRegistry());
     }
 }

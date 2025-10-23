@@ -43,14 +43,15 @@ public class MetricPubAckInboundInterceptor implements PubackInboundInterceptor 
     }
 
     public void onInboundPuback(@NotNull PubackInboundInput input, @NotNull PubackInboundOutput output) {
-        String appAlias = this.metricHolder.getAppName((ClientBasedInput)input);
+        String appAlias = this.metricHolder.getAppName((ClientBasedInput) input);
         AckReasonCode code = output.getPubackPacket().getReasonCode();
         String clientId = input.getClientInformation().getClientId();
         if (AckReasonCode.SUCCESS == code) {
-            this.metricHolder.getAppReceiveAckCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias).inc();
+            this.metricHolder.getAppReceiveAckCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias).inc();
             log.debug("App {} ack msg receive success, clientId {}.", appAlias, clientId);
         } else {
-            log.debug("App {} ack msg receive failed, reason {}, clientId {}.", new Object[] { appAlias, code, clientId });
+            log.debug("App {} ack msg receive failed, reason {}, clientId {}.",
+                    new Object[] { appAlias, code, clientId });
         }
     }
 }

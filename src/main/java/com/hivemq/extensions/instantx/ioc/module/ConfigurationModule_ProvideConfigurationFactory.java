@@ -32,7 +32,8 @@ public final class ConfigurationModule_ProvideConfigurationFactory implements Fa
 
     private final Provider<MetricApplicationConfigurationYamlReader> configurationReaderProvider;
 
-    public ConfigurationModule_ProvideConfigurationFactory(ConfigurationModule module, Provider<MetricApplicationConfigurationYamlReader> configurationReaderProvider) {
+    public ConfigurationModule_ProvideConfigurationFactory(ConfigurationModule module,
+            Provider<MetricApplicationConfigurationYamlReader> configurationReaderProvider) {
         this.module = module;
         this.configurationReaderProvider = configurationReaderProvider;
     }
@@ -41,11 +42,14 @@ public final class ConfigurationModule_ProvideConfigurationFactory implements Fa
         return provideConfiguration(this.module, this.configurationReaderProvider);
     }
 
-    public static ConfigurationModule_ProvideConfigurationFactory create(ConfigurationModule module, Provider<MetricApplicationConfigurationYamlReader> configurationReaderProvider) {
+    public static ConfigurationModule_ProvideConfigurationFactory create(ConfigurationModule module,
+            Provider<MetricApplicationConfigurationYamlReader> configurationReaderProvider) {
         return new ConfigurationModule_ProvideConfigurationFactory(module, configurationReaderProvider);
     }
 
-    public static MetricApplicationConfiguration provideConfiguration(ConfigurationModule instance, Provider<MetricApplicationConfigurationYamlReader> configurationReader) {
-        return (MetricApplicationConfiguration)Preconditions.checkNotNullFromProvides(instance.provideConfiguration(configurationReader));
+    public static MetricApplicationConfiguration provideConfiguration(ConfigurationModule instance,
+            Provider<MetricApplicationConfigurationYamlReader> configurationReader) {
+        return (MetricApplicationConfiguration) Preconditions
+                .checkNotNullFromProvides(instance.provideConfiguration(configurationReader));
     }
 }

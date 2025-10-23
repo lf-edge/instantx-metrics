@@ -26,7 +26,7 @@ import com.hivemq.extensions.instantx.ioc.module.HiveMQBindingsModule;
 import dagger.Component;
 import javax.inject.Singleton;
 
-@Component(modules = {HiveMQBindingsModule.class, ConfigurationModule.class})
+@Component(modules = { HiveMQBindingsModule.class, ConfigurationModule.class })
 @Singleton
 public interface ApplicationMetricsExtension {
     MetricApplicationConfiguration configuration();

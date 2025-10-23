@@ -33,21 +33,26 @@ public final class SchemaValidatedYamlReaderFactory_Factory implements Factory<S
 
     private final Provider<ObjectMapper> yamlMapperProvider;
 
-    public SchemaValidatedYamlReaderFactory_Factory(Provider<File> extensionFolderProvider, Provider<ObjectMapper> jsonMapperProvider, Provider<ObjectMapper> yamlMapperProvider) {
+    public SchemaValidatedYamlReaderFactory_Factory(Provider<File> extensionFolderProvider,
+            Provider<ObjectMapper> jsonMapperProvider, Provider<ObjectMapper> yamlMapperProvider) {
         this.extensionFolderProvider = extensionFolderProvider;
         this.jsonMapperProvider = jsonMapperProvider;
         this.yamlMapperProvider = yamlMapperProvider;
     }
 
     public SchemaValidatedYamlReaderFactory get() {
-        return newInstance((File)this.extensionFolderProvider.get(), (ObjectMapper)this.jsonMapperProvider.get(), (ObjectMapper)this.yamlMapperProvider.get());
+        return newInstance((File) this.extensionFolderProvider.get(), (ObjectMapper) this.jsonMapperProvider.get(),
+                (ObjectMapper) this.yamlMapperProvider.get());
     }
 
-    public static SchemaValidatedYamlReaderFactory_Factory create(Provider<File> extensionFolderProvider, Provider<ObjectMapper> jsonMapperProvider, Provider<ObjectMapper> yamlMapperProvider) {
-        return new SchemaValidatedYamlReaderFactory_Factory(extensionFolderProvider, jsonMapperProvider, yamlMapperProvider);
+    public static SchemaValidatedYamlReaderFactory_Factory create(Provider<File> extensionFolderProvider,
+            Provider<ObjectMapper> jsonMapperProvider, Provider<ObjectMapper> yamlMapperProvider) {
+        return new SchemaValidatedYamlReaderFactory_Factory(extensionFolderProvider, jsonMapperProvider,
+                yamlMapperProvider);
     }
 
-    public static SchemaValidatedYamlReaderFactory newInstance(File extensionFolder, ObjectMapper jsonMapper, ObjectMapper yamlMapper) {
+    public static SchemaValidatedYamlReaderFactory newInstance(File extensionFolder, ObjectMapper jsonMapper,
+            ObjectMapper yamlMapper) {
         return new SchemaValidatedYamlReaderFactory(extensionFolder, jsonMapper, yamlMapper);
     }
 }

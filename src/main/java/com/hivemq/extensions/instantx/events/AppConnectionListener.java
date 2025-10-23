@@ -64,7 +64,7 @@ public class AppConnectionListener implements ClientLifecycleEventListener {
         String conStartTime = "" + System.currentTimeMillis();
         String clientId = input.getClientInformation().getClientId();
         store.put("con_start", ByteBuffer.wrap(conStartTime.getBytes(StandardCharsets.UTF_8)));
-        this.metricHolder.getAppConnectionCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias).inc();
+        this.metricHolder.getAppConnectionCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias).inc();
         log.debug("App {} authn success, startTime: {}, clientId: {} ", new Object[] { appAlias, conStartTime, input
                 .getClientInformation().getClientId() });
     }
@@ -75,16 +75,20 @@ public class AppConnectionListener implements ClientLifecycleEventListener {
         Optional<ByteBuffer> startTime = store.get("con_start");
         String clientId = input.getClientInformation().getClientId();
         Optional<DisconnectedReasonCode> reasonCode = input.getReasonCode();
-        if (reasonCode.isPresent() && ((DisconnectedReasonCode)reasonCode
+        if (reasonCode.isPresent() && ((DisconnectedReasonCode) reasonCode
                 .get()).equals(DisconnectedReasonCode.NOT_AUTHORIZED)) {
-            this.metricHolder.getAppDisconnectUnauthorizedCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias).inc();
+            this.metricHolder
+                    .getAppDisconnectUnauthorizedCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias)
+                    .inc();
             log.debug("App {} authz disconnect, clientId: {}", appAlias, clientId);
         }
         if (startTime.isPresent()) {
             long start = Long.parseLong(this.metricHolder.getValueAsStringFrom(startTime));
             long durationInSeconds = (System.currentTimeMillis() - start) / 1000L;
-            this.metricHolder.getAppConnectionTime(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias).inc(durationInSeconds);
-            log.debug("App {} disconnects, conn duration {} secs, clientId: {}", new Object[] { appAlias, Long.valueOf(durationInSeconds), clientId });
+            this.metricHolder.getAppConnectionTime(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias)
+                    .inc(durationInSeconds);
+            log.debug("App {} disconnects, conn duration {} secs, clientId: {}",
+                    new Object[] { appAlias, Long.valueOf(durationInSeconds), clientId });
         } else {
             log.debug("App {} no start time, clientId {}", appAlias, clientId);
         }

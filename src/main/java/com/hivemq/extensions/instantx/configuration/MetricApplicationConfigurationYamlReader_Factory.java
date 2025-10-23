@@ -26,28 +26,37 @@ import java.util.concurrent.ScheduledExecutorService;
 import javax.inject.Provider;
 
 @DaggerGenerated
-public final class MetricApplicationConfigurationYamlReader_Factory implements Factory<MetricApplicationConfigurationYamlReader> {
+public final class MetricApplicationConfigurationYamlReader_Factory
+        implements Factory<MetricApplicationConfigurationYamlReader> {
     private final Provider<File> extensionFolderProvider;
 
     private final Provider<ScheduledExecutorService> scheduledExecutorProvider;
 
     private final Provider<SchemaValidatedYamlReaderFactory> configFactoryProvider;
 
-    public MetricApplicationConfigurationYamlReader_Factory(Provider<File> extensionFolderProvider, Provider<ScheduledExecutorService> scheduledExecutorProvider, Provider<SchemaValidatedYamlReaderFactory> configFactoryProvider) {
+    public MetricApplicationConfigurationYamlReader_Factory(Provider<File> extensionFolderProvider,
+            Provider<ScheduledExecutorService> scheduledExecutorProvider,
+            Provider<SchemaValidatedYamlReaderFactory> configFactoryProvider) {
         this.extensionFolderProvider = extensionFolderProvider;
         this.scheduledExecutorProvider = scheduledExecutorProvider;
         this.configFactoryProvider = configFactoryProvider;
     }
 
     public MetricApplicationConfigurationYamlReader get() {
-        return newInstance((File)this.extensionFolderProvider.get(), (ScheduledExecutorService)this.scheduledExecutorProvider.get(), (SchemaValidatedYamlReaderFactory)this.configFactoryProvider.get());
+        return newInstance((File) this.extensionFolderProvider.get(),
+                (ScheduledExecutorService) this.scheduledExecutorProvider.get(),
+                (SchemaValidatedYamlReaderFactory) this.configFactoryProvider.get());
     }
 
-    public static MetricApplicationConfigurationYamlReader_Factory create(Provider<File> extensionFolderProvider, Provider<ScheduledExecutorService> scheduledExecutorProvider, Provider<SchemaValidatedYamlReaderFactory> configFactoryProvider) {
-        return new MetricApplicationConfigurationYamlReader_Factory(extensionFolderProvider, scheduledExecutorProvider, configFactoryProvider);
+    public static MetricApplicationConfigurationYamlReader_Factory create(Provider<File> extensionFolderProvider,
+            Provider<ScheduledExecutorService> scheduledExecutorProvider,
+            Provider<SchemaValidatedYamlReaderFactory> configFactoryProvider) {
+        return new MetricApplicationConfigurationYamlReader_Factory(extensionFolderProvider, scheduledExecutorProvider,
+                configFactoryProvider);
     }
 
-    public static MetricApplicationConfigurationYamlReader newInstance(File extensionFolder, ScheduledExecutorService scheduledExecutor, SchemaValidatedYamlReaderFactory configFactory) {
+    public static MetricApplicationConfigurationYamlReader newInstance(File extensionFolder,
+            ScheduledExecutorService scheduledExecutor, SchemaValidatedYamlReaderFactory configFactory) {
         return new MetricApplicationConfigurationYamlReader(extensionFolder, scheduledExecutor, configFactory);
     }
 }

@@ -33,7 +33,7 @@ public final class MetricSubAckInterceptor_Factory implements Factory<MetricSubA
     }
 
     public MetricSubAckInterceptor get() {
-        return newInstance((MetricHolder)this.metricHolderProvider.get());
+        return newInstance((MetricHolder) this.metricHolderProvider.get());
     }
 
     public static MetricSubAckInterceptor_Factory create(Provider<MetricHolder> metricHolderProvider) {

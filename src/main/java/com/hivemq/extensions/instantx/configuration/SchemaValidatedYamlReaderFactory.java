@@ -54,15 +54,19 @@ public class SchemaValidatedYamlReaderFactory {
     private final ObjectMapper yamlMapper;
 
     @Inject
-    public SchemaValidatedYamlReaderFactory(@Named("extension-home") @NotNull File extensionFolder, @Named("jsonMapper") @NotNull ObjectMapper jsonMapper, @Named("yamlMapper") @NotNull ObjectMapper yamlMapper) {
+    public SchemaValidatedYamlReaderFactory(@Named("extension-home") @NotNull File extensionFolder,
+            @Named("jsonMapper") @NotNull ObjectMapper jsonMapper,
+            @Named("yamlMapper") @NotNull ObjectMapper yamlMapper) {
         this.extensionFolder = extensionFolder;
         this.jsonMapper = jsonMapper;
         this.yamlMapper = yamlMapper;
     }
 
     @NotNull
-    public <T> SchemaValidatedConfigReader<T> createReader(@NotNull String configFile, @NotNull String schemaName, @NotNull Class<T> clazz) throws IOException, ProcessingException {
-        JsonSchema jsonSchema = JsonSchemaFactory.byDefault().getJsonSchema(this.jsonMapper.readTree(MetricApplicationConfigurationYamlReader.class.getResource("/schema/" + schemaName)));
+    public <T> SchemaValidatedConfigReader<T> createReader(@NotNull String configFile, @NotNull String schemaName,
+            @NotNull Class<T> clazz) throws IOException, ProcessingException {
+        JsonSchema jsonSchema = JsonSchemaFactory.byDefault().getJsonSchema(this.jsonMapper
+                .readTree(MetricApplicationConfigurationYamlReader.class.getResource("/schema/" + schemaName)));
         return new SchemaValidatedConfigReader<>(this.extensionFolder, this.yamlMapper, configFile, jsonSchema, clazz);
     }
 
@@ -82,7 +86,9 @@ public class SchemaValidatedYamlReaderFactory {
         @NotNull
         private final Class<T> clazz;
 
-        public SchemaValidatedConfigReader(@Named("extension-home") @NotNull File extensionFolder, @Named("yamlMapper") @NotNull ObjectMapper yamlMapper, @NotNull String configFile, @NotNull JsonSchema jsonSchema, @NotNull Class<T> clazz) {
+        public SchemaValidatedConfigReader(@Named("extension-home") @NotNull File extensionFolder,
+                @Named("yamlMapper") @NotNull ObjectMapper yamlMapper, @NotNull String configFile,
+                @NotNull JsonSchema jsonSchema, @NotNull Class<T> clazz) {
             this.extensionFolder = extensionFolder;
             this.yamlMapper = yamlMapper;
             this.configFile = configFile;
@@ -98,9 +104,11 @@ public class SchemaValidatedYamlReaderFactory {
                 ProcessingReport validation = this.jsonSchema.validate(configurationJsonNode);
                 if (!validation.isSuccess()) {
                     validation.forEach(msg -> SchemaValidatedYamlReaderFactory.log.error(msg.asJson().toString()));
-                    throw new InvalidConfigurationException(String.format("Config file %s has failed validation, will not be loaded", new Object[] { this.configFile }));
+                    throw new InvalidConfigurationException(
+                            String.format("Config file %s has failed validation, will not be loaded",
+                                    new Object[] { this.configFile }));
                 }
-                T newConfiguration = (T)this.yamlMapper.treeToValue((TreeNode)configurationJsonNode, this.clazz);
+                T newConfiguration = (T) this.yamlMapper.treeToValue((TreeNode) configurationJsonNode, this.clazz);
                 T t1 = newConfiguration;
                 fileReader.close();
                 return t1;

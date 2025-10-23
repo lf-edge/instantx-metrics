@@ -99,7 +99,8 @@ public final class DaggerApplicationMetricsExtension implements ApplicationMetri
 
     private Provider<ExtensionInitializer> extensionInitializerProvider;
 
-    private DaggerApplicationMetricsExtension(HiveMQBindingsModule hiveMQBindingsModuleParam, ConfigurationModule configurationModuleParam) {
+    private DaggerApplicationMetricsExtension(HiveMQBindingsModule hiveMQBindingsModuleParam,
+            ConfigurationModule configurationModuleParam) {
         initialize(hiveMQBindingsModuleParam, configurationModuleParam);
     }
 
@@ -107,33 +108,62 @@ public final class DaggerApplicationMetricsExtension implements ApplicationMetri
         return new Builder();
     }
 
-    private void initialize(HiveMQBindingsModule hiveMQBindingsModuleParam, ConfigurationModule configurationModuleParam) {
-        this.provideExtensionHomeFolderProvider = DoubleCheck.provider((Provider)HiveMQBindingsModule_ProvideExtensionHomeFolderFactory.create(hiveMQBindingsModuleParam));
-        this.provideScheduledExecutorServiceProvider = DoubleCheck.provider((Provider)HiveMQBindingsModule_ProvideScheduledExecutorServiceFactory.create(hiveMQBindingsModuleParam));
-        this.jsonMapperProvider = DoubleCheck.provider((Provider)ConfigurationModule_JsonMapperFactory.create(configurationModuleParam));
-        this.yamlMapperProvider = DoubleCheck.provider((Provider)ConfigurationModule_YamlMapperFactory.create(configurationModuleParam));
-        this.schemaValidatedYamlReaderFactoryProvider = DoubleCheck.provider((Provider)SchemaValidatedYamlReaderFactory_Factory.create(this.provideExtensionHomeFolderProvider, this.jsonMapperProvider, this.yamlMapperProvider));
-        this.metricApplicationConfigurationYamlReaderProvider = DoubleCheck.provider((Provider)MetricApplicationConfigurationYamlReader_Factory.create(this.provideExtensionHomeFolderProvider, this.provideScheduledExecutorServiceProvider, this.schemaValidatedYamlReaderFactoryProvider));
-        this.provideConfigurationProvider = DoubleCheck.provider((Provider)ConfigurationModule_ProvideConfigurationFactory.create(configurationModuleParam, this.metricApplicationConfigurationYamlReaderProvider));
-        this.provideEventRegistryProvider = DoubleCheck.provider((Provider)HiveMQBindingsModule_ProvideEventRegistryFactory.create(hiveMQBindingsModuleParam));
-        this.provideInitializerRegistryProvider = DoubleCheck.provider((Provider)HiveMQBindingsModule_ProvideInitializerRegistryFactory.create(hiveMQBindingsModuleParam));
-        this.provideMetricRegistryProvider = DoubleCheck.provider((Provider)HiveMQBindingsModule_ProvideMetricRegistryFactory.create(hiveMQBindingsModuleParam));
-        this.metricHolderProvider = DoubleCheck.provider((Provider)MetricHolder_Factory.create(this.provideMetricRegistryProvider, this.provideConfigurationProvider));
-        this.metricPubAckInboundInterceptorProvider = DoubleCheck.provider((Provider)MetricPubAckInboundInterceptor_Factory.create(this.metricHolderProvider));
-        this.metricPublishInboundInterceptorProvider = DoubleCheck.provider((Provider)MetricPublishInboundInterceptor_Factory.create(this.metricHolderProvider));
-        this.metricPublishReceiveInterceptorProvider = DoubleCheck.provider((Provider)MetricPublishReceiveInterceptor_Factory.create(this.metricHolderProvider));
-        this.metricPubAckOutboundInterceptorProvider = DoubleCheck.provider((Provider)MetricPubAckOutboundInterceptor_Factory.create(this.metricHolderProvider));
-        this.metricSubAckInterceptorProvider = DoubleCheck.provider((Provider)MetricSubAckInterceptor_Factory.create(this.metricHolderProvider));
-        this.appConnectionListenerProvider = DoubleCheck.provider((Provider)AppConnectionListener_Factory.create(this.metricHolderProvider));
-        this.extensionInitializerProvider = DoubleCheck.provider((Provider)ExtensionInitializer_Factory.create(this.provideEventRegistryProvider, this.provideInitializerRegistryProvider, this.provideMetricRegistryProvider, this.provideConfigurationProvider, this.metricPubAckInboundInterceptorProvider, this.metricPublishInboundInterceptorProvider, this.metricPublishReceiveInterceptorProvider, this.metricPubAckOutboundInterceptorProvider, this.metricSubAckInterceptorProvider, this.appConnectionListenerProvider));
+    private void initialize(HiveMQBindingsModule hiveMQBindingsModuleParam,
+            ConfigurationModule configurationModuleParam) {
+        this.provideExtensionHomeFolderProvider = DoubleCheck.provider(
+                (Provider) HiveMQBindingsModule_ProvideExtensionHomeFolderFactory.create(hiveMQBindingsModuleParam));
+        this.provideScheduledExecutorServiceProvider = DoubleCheck
+                .provider((Provider) HiveMQBindingsModule_ProvideScheduledExecutorServiceFactory
+                        .create(hiveMQBindingsModuleParam));
+        this.jsonMapperProvider = DoubleCheck
+                .provider((Provider) ConfigurationModule_JsonMapperFactory.create(configurationModuleParam));
+        this.yamlMapperProvider = DoubleCheck
+                .provider((Provider) ConfigurationModule_YamlMapperFactory.create(configurationModuleParam));
+        this.schemaValidatedYamlReaderFactoryProvider = DoubleCheck.provider(
+                (Provider) SchemaValidatedYamlReaderFactory_Factory.create(this.provideExtensionHomeFolderProvider,
+                        this.jsonMapperProvider, this.yamlMapperProvider));
+        this.metricApplicationConfigurationYamlReaderProvider = DoubleCheck
+                .provider((Provider) MetricApplicationConfigurationYamlReader_Factory.create(
+                        this.provideExtensionHomeFolderProvider, this.provideScheduledExecutorServiceProvider,
+                        this.schemaValidatedYamlReaderFactoryProvider));
+        this.provideConfigurationProvider = DoubleCheck
+                .provider((Provider) ConfigurationModule_ProvideConfigurationFactory.create(configurationModuleParam,
+                        this.metricApplicationConfigurationYamlReaderProvider));
+        this.provideEventRegistryProvider = DoubleCheck.provider(
+                (Provider) HiveMQBindingsModule_ProvideEventRegistryFactory.create(hiveMQBindingsModuleParam));
+        this.provideInitializerRegistryProvider = DoubleCheck.provider(
+                (Provider) HiveMQBindingsModule_ProvideInitializerRegistryFactory.create(hiveMQBindingsModuleParam));
+        this.provideMetricRegistryProvider = DoubleCheck.provider(
+                (Provider) HiveMQBindingsModule_ProvideMetricRegistryFactory.create(hiveMQBindingsModuleParam));
+        this.metricHolderProvider = DoubleCheck.provider((Provider) MetricHolder_Factory
+                .create(this.provideMetricRegistryProvider, this.provideConfigurationProvider));
+        this.metricPubAckInboundInterceptorProvider = DoubleCheck
+                .provider((Provider) MetricPubAckInboundInterceptor_Factory.create(this.metricHolderProvider));
+        this.metricPublishInboundInterceptorProvider = DoubleCheck
+                .provider((Provider) MetricPublishInboundInterceptor_Factory.create(this.metricHolderProvider));
+        this.metricPublishReceiveInterceptorProvider = DoubleCheck
+                .provider((Provider) MetricPublishReceiveInterceptor_Factory.create(this.metricHolderProvider));
+        this.metricPubAckOutboundInterceptorProvider = DoubleCheck
+                .provider((Provider) MetricPubAckOutboundInterceptor_Factory.create(this.metricHolderProvider));
+        this.metricSubAckInterceptorProvider = DoubleCheck
+                .provider((Provider) MetricSubAckInterceptor_Factory.create(this.metricHolderProvider));
+        this.appConnectionListenerProvider = DoubleCheck
+                .provider((Provider) AppConnectionListener_Factory.create(this.metricHolderProvider));
+        this.extensionInitializerProvider = DoubleCheck
+                .provider((Provider) ExtensionInitializer_Factory.create(this.provideEventRegistryProvider,
+                        this.provideInitializerRegistryProvider, this.provideMetricRegistryProvider,
+                        this.provideConfigurationProvider, this.metricPubAckInboundInterceptorProvider,
+                        this.metricPublishInboundInterceptorProvider, this.metricPublishReceiveInterceptorProvider,
+                        this.metricPubAckOutboundInterceptorProvider, this.metricSubAckInterceptorProvider,
+                        this.appConnectionListenerProvider));
     }
 
     public MetricApplicationConfiguration configuration() {
-        return (MetricApplicationConfiguration)this.provideConfigurationProvider.get();
+        return (MetricApplicationConfiguration) this.provideConfigurationProvider.get();
     }
 
     public ExtensionInitializer initializer() {
-        return (ExtensionInitializer)this.extensionInitializerProvider.get();
+        return (ExtensionInitializer) this.extensionInitializerProvider.get();
     }
 
     public static final class Builder {
@@ -142,12 +172,12 @@ public final class DaggerApplicationMetricsExtension implements ApplicationMetri
         private ConfigurationModule configurationModule;
 
         public Builder hiveMQBindingsModule(HiveMQBindingsModule hiveMQBindingsModule) {
-            this.hiveMQBindingsModule = (HiveMQBindingsModule)Preconditions.checkNotNull(hiveMQBindingsModule);
+            this.hiveMQBindingsModule = (HiveMQBindingsModule) Preconditions.checkNotNull(hiveMQBindingsModule);
             return this;
         }
 
         public Builder configurationModule(ConfigurationModule configurationModule) {
-            this.configurationModule = (ConfigurationModule)Preconditions.checkNotNull(configurationModule);
+            this.configurationModule = (ConfigurationModule) Preconditions.checkNotNull(configurationModule);
             return this;
         }
 

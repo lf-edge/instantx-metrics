@@ -33,7 +33,7 @@ public final class AppConnectionListener_Factory implements Factory<AppConnectio
     }
 
     public AppConnectionListener get() {
-        return newInstance((MetricHolder)this.metricHolderProvider.get());
+        return newInstance((MetricHolder) this.metricHolderProvider.get());
     }
 
     public static AppConnectionListener_Factory create(Provider<MetricHolder> metricHolderProvider) {

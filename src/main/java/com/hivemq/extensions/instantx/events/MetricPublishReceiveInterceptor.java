@@ -43,15 +43,21 @@ public class MetricPublishReceiveInterceptor implements PublishOutboundIntercept
 
     public void onOutboundPublish(@NotNull PublishOutboundInput input, @NotNull PublishOutboundOutput output) {
         String topic = input.getPublishPacket().getTopic();
-        String appAlias = this.metricHolder.getAppName((ClientBasedInput)input);
+        String appAlias = this.metricHolder.getAppName((ClientBasedInput) input);
         String clientId = input.getClientInformation().getClientId();
         if (this.metricHolder.isPublicMessage(topic)) {
-            this.metricHolder.getAppPublicReceiveCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias).inc();
-            this.metricHolder.getAppPublicReceiveByTypeCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias, topic).inc();
+            this.metricHolder.getAppPublicReceiveCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias)
+                    .inc();
+            this.metricHolder
+                    .getAppPublicReceiveByTypeCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias, topic)
+                    .inc();
             log.debug("App {} public msg receive, topic {}, clientId {}.", new Object[] { appAlias, topic, clientId });
         } else {
-            this.metricHolder.getAppPrivateReceiveCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias).inc();
-            this.metricHolder.getAppPrivateReceiveByTypeCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias, topic).inc();
+            this.metricHolder.getAppPrivateReceiveCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias)
+                    .inc();
+            this.metricHolder
+                    .getAppPrivateReceiveByTypeCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias, topic)
+                    .inc();
             log.debug("App {} private msg receive, topic {}, clientId {}.", new Object[] { appAlias, topic, clientId });
         }
     }

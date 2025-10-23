@@ -41,6 +41,6 @@ public final class HiveMQBindingsModule_ProvideInitializerRegistryFactory implem
     }
 
     public static InitializerRegistry provideInitializerRegistry(HiveMQBindingsModule instance) {
-        return (InitializerRegistry)Preconditions.checkNotNullFromProvides(instance.provideInitializerRegistry());
+        return (InitializerRegistry) Preconditions.checkNotNullFromProvides(instance.provideInitializerRegistry());
     }
 }

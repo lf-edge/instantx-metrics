@@ -41,6 +41,6 @@ public final class HiveMQBindingsModule_ProvideExecutorServiceFactory implements
     }
 
     public static ExecutorService provideExecutorService(HiveMQBindingsModule instance) {
-        return (ExecutorService)Preconditions.checkNotNullFromProvides(instance.provideExecutorService());
+        return (ExecutorService) Preconditions.checkNotNullFromProvides(instance.provideExecutorService());
     }
 }

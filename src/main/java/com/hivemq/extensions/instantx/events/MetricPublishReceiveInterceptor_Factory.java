@@ -33,7 +33,7 @@ public final class MetricPublishReceiveInterceptor_Factory implements Factory<Me
     }
 
     public MetricPublishReceiveInterceptor get() {
-        return newInstance((MetricHolder)this.metricHolderProvider.get());
+        return newInstance((MetricHolder) this.metricHolderProvider.get());
     }
 
     public static MetricPublishReceiveInterceptor_Factory create(Provider<MetricHolder> metricHolderProvider) {
