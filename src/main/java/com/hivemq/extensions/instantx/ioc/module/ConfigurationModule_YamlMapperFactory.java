@@ -41,6 +41,6 @@ public final class ConfigurationModule_YamlMapperFactory implements Factory<Obje
     }
 
     public static ObjectMapper yamlMapper(ConfigurationModule instance) {
-        return (ObjectMapper)Preconditions.checkNotNullFromProvides(instance.yamlMapper());
+        return (ObjectMapper) Preconditions.checkNotNullFromProvides(instance.yamlMapper());
     }
 }

@@ -44,12 +44,14 @@ public class MetricSubAckInterceptor implements SubackOutboundInterceptor {
     }
 
     public void onOutboundSuback(@NotNull SubackOutboundInput input, @NotNull SubackOutboundOutput output) {
-        String appAlias = this.metricHolder.getAppName((ClientBasedInput)input);
+        String appAlias = this.metricHolder.getAppName((ClientBasedInput) input);
         List<SubackReasonCode> codes = output.getSubackPacket().getReasonCodes();
         String clientId = input.getClientInformation().getClientId();
         for (SubackReasonCode code : codes) {
             if (SubackReasonCode.NOT_AUTHORIZED == code) {
-                this.metricHolder.getAppSubscribeUnauthorizedCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias).inc();
+                this.metricHolder
+                        .getAppSubscribeUnauthorizedCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias)
+                        .inc();
                 log.debug("App {} unauthorized subscription, clientId {}.", appAlias, clientId);
             }
         }

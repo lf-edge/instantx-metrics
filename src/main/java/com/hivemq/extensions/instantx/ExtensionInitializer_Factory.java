@@ -55,7 +55,15 @@ public final class ExtensionInitializer_Factory implements Factory<ExtensionInit
 
     private final Provider<AppConnectionListener> appConnectionListenerProvider;
 
-    public ExtensionInitializer_Factory(Provider<EventRegistry> eventRegistryProvider, Provider<InitializerRegistry> initializerRegistryProvider, Provider<MetricRegistry> metricRegistryProvider, Provider<MetricApplicationConfiguration> multiTenancyConfigurationProvider, Provider<MetricPubAckInboundInterceptor> pubAckInboundInterceptorProvider, Provider<MetricPublishInboundInterceptor> inboundInterceptorProvider, Provider<MetricPublishReceiveInterceptor> receiveInterceptorProvider, Provider<MetricPubAckOutboundInterceptor> pubAckReceiveInterceptorProvider, Provider<MetricSubAckInterceptor> subscribeInterceptorProvider, Provider<AppConnectionListener> appConnectionListenerProvider) {
+    public ExtensionInitializer_Factory(Provider<EventRegistry> eventRegistryProvider,
+            Provider<InitializerRegistry> initializerRegistryProvider, Provider<MetricRegistry> metricRegistryProvider,
+            Provider<MetricApplicationConfiguration> multiTenancyConfigurationProvider,
+            Provider<MetricPubAckInboundInterceptor> pubAckInboundInterceptorProvider,
+            Provider<MetricPublishInboundInterceptor> inboundInterceptorProvider,
+            Provider<MetricPublishReceiveInterceptor> receiveInterceptorProvider,
+            Provider<MetricPubAckOutboundInterceptor> pubAckReceiveInterceptorProvider,
+            Provider<MetricSubAckInterceptor> subscribeInterceptorProvider,
+            Provider<AppConnectionListener> appConnectionListenerProvider) {
         this.eventRegistryProvider = eventRegistryProvider;
         this.initializerRegistryProvider = initializerRegistryProvider;
         this.metricRegistryProvider = metricRegistryProvider;
@@ -69,14 +77,41 @@ public final class ExtensionInitializer_Factory implements Factory<ExtensionInit
     }
 
     public ExtensionInitializer get() {
-        return newInstance((EventRegistry)this.eventRegistryProvider.get(), (InitializerRegistry)this.initializerRegistryProvider.get(), (MetricRegistry)this.metricRegistryProvider.get(), (MetricApplicationConfiguration)this.multiTenancyConfigurationProvider.get(), (MetricPubAckInboundInterceptor)this.pubAckInboundInterceptorProvider.get(), (MetricPublishInboundInterceptor)this.inboundInterceptorProvider.get(), (MetricPublishReceiveInterceptor)this.receiveInterceptorProvider.get(), (MetricPubAckOutboundInterceptor)this.pubAckReceiveInterceptorProvider.get(), (MetricSubAckInterceptor)this.subscribeInterceptorProvider.get(), (AppConnectionListener)this.appConnectionListenerProvider.get());
+        return newInstance((EventRegistry) this.eventRegistryProvider.get(),
+                (InitializerRegistry) this.initializerRegistryProvider.get(),
+                (MetricRegistry) this.metricRegistryProvider.get(),
+                (MetricApplicationConfiguration) this.multiTenancyConfigurationProvider.get(),
+                (MetricPubAckInboundInterceptor) this.pubAckInboundInterceptorProvider.get(),
+                (MetricPublishInboundInterceptor) this.inboundInterceptorProvider.get(),
+                (MetricPublishReceiveInterceptor) this.receiveInterceptorProvider.get(),
+                (MetricPubAckOutboundInterceptor) this.pubAckReceiveInterceptorProvider.get(),
+                (MetricSubAckInterceptor) this.subscribeInterceptorProvider.get(),
+                (AppConnectionListener) this.appConnectionListenerProvider.get());
     }
 
-    public static ExtensionInitializer_Factory create(Provider<EventRegistry> eventRegistryProvider, Provider<InitializerRegistry> initializerRegistryProvider, Provider<MetricRegistry> metricRegistryProvider, Provider<MetricApplicationConfiguration> multiTenancyConfigurationProvider, Provider<MetricPubAckInboundInterceptor> pubAckInboundInterceptorProvider, Provider<MetricPublishInboundInterceptor> inboundInterceptorProvider, Provider<MetricPublishReceiveInterceptor> receiveInterceptorProvider, Provider<MetricPubAckOutboundInterceptor> pubAckReceiveInterceptorProvider, Provider<MetricSubAckInterceptor> subscribeInterceptorProvider, Provider<AppConnectionListener> appConnectionListenerProvider) {
-        return new ExtensionInitializer_Factory(eventRegistryProvider, initializerRegistryProvider, metricRegistryProvider, multiTenancyConfigurationProvider, pubAckInboundInterceptorProvider, inboundInterceptorProvider, receiveInterceptorProvider, pubAckReceiveInterceptorProvider, subscribeInterceptorProvider, appConnectionListenerProvider);
+    public static ExtensionInitializer_Factory create(Provider<EventRegistry> eventRegistryProvider,
+            Provider<InitializerRegistry> initializerRegistryProvider, Provider<MetricRegistry> metricRegistryProvider,
+            Provider<MetricApplicationConfiguration> multiTenancyConfigurationProvider,
+            Provider<MetricPubAckInboundInterceptor> pubAckInboundInterceptorProvider,
+            Provider<MetricPublishInboundInterceptor> inboundInterceptorProvider,
+            Provider<MetricPublishReceiveInterceptor> receiveInterceptorProvider,
+            Provider<MetricPubAckOutboundInterceptor> pubAckReceiveInterceptorProvider,
+            Provider<MetricSubAckInterceptor> subscribeInterceptorProvider,
+            Provider<AppConnectionListener> appConnectionListenerProvider) {
+        return new ExtensionInitializer_Factory(eventRegistryProvider, initializerRegistryProvider,
+                metricRegistryProvider, multiTenancyConfigurationProvider, pubAckInboundInterceptorProvider,
+                inboundInterceptorProvider, receiveInterceptorProvider, pubAckReceiveInterceptorProvider,
+                subscribeInterceptorProvider, appConnectionListenerProvider);
     }
 
-    public static ExtensionInitializer newInstance(EventRegistry eventRegistry, InitializerRegistry initializerRegistry, MetricRegistry metricRegistry, MetricApplicationConfiguration multiTenancyConfiguration, MetricPubAckInboundInterceptor pubAckInboundInterceptor, MetricPublishInboundInterceptor inboundInterceptor, MetricPublishReceiveInterceptor receiveInterceptor, MetricPubAckOutboundInterceptor pubAckReceiveInterceptor, MetricSubAckInterceptor subscribeInterceptor, AppConnectionListener appConnectionListener) {
-        return new ExtensionInitializer(eventRegistry, initializerRegistry, metricRegistry, multiTenancyConfiguration, pubAckInboundInterceptor, inboundInterceptor, receiveInterceptor, pubAckReceiveInterceptor, subscribeInterceptor, appConnectionListener);
+    public static ExtensionInitializer newInstance(EventRegistry eventRegistry, InitializerRegistry initializerRegistry,
+            MetricRegistry metricRegistry, MetricApplicationConfiguration multiTenancyConfiguration,
+            MetricPubAckInboundInterceptor pubAckInboundInterceptor, MetricPublishInboundInterceptor inboundInterceptor,
+            MetricPublishReceiveInterceptor receiveInterceptor,
+            MetricPubAckOutboundInterceptor pubAckReceiveInterceptor, MetricSubAckInterceptor subscribeInterceptor,
+            AppConnectionListener appConnectionListener) {
+        return new ExtensionInitializer(eventRegistry, initializerRegistry, metricRegistry, multiTenancyConfiguration,
+                pubAckInboundInterceptor, inboundInterceptor, receiveInterceptor, pubAckReceiveInterceptor,
+                subscribeInterceptor, appConnectionListener);
     }
 }

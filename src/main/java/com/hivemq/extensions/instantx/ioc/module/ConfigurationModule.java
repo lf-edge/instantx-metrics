@@ -38,7 +38,7 @@ public class ConfigurationModule {
     @Named("yamlMapper")
     @NotNull
     ObjectMapper yamlMapper() {
-        return new ObjectMapper((JsonFactory)new YAMLFactory());
+        return new ObjectMapper((JsonFactory) new YAMLFactory());
     }
 
     @Provides
@@ -52,7 +52,8 @@ public class ConfigurationModule {
     @Provides
     @Singleton
     @NotNull
-    MetricApplicationConfiguration provideConfiguration(@NotNull Provider<MetricApplicationConfigurationYamlReader> configurationReader) {
-        return (MetricApplicationConfiguration)configurationReader.get();
+    MetricApplicationConfiguration provideConfiguration(
+            @NotNull Provider<MetricApplicationConfigurationYamlReader> configurationReader) {
+        return (MetricApplicationConfiguration) configurationReader.get();
     }
 }

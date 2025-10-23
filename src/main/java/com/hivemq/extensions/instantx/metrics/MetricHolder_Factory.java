@@ -31,16 +31,19 @@ public final class MetricHolder_Factory implements Factory<MetricHolder> {
 
     private final Provider<MetricApplicationConfiguration> configProvider;
 
-    public MetricHolder_Factory(Provider<MetricRegistry> registryProvider, Provider<MetricApplicationConfiguration> configProvider) {
+    public MetricHolder_Factory(Provider<MetricRegistry> registryProvider,
+            Provider<MetricApplicationConfiguration> configProvider) {
         this.registryProvider = registryProvider;
         this.configProvider = configProvider;
     }
 
     public MetricHolder get() {
-        return newInstance((MetricRegistry)this.registryProvider.get(), (MetricApplicationConfiguration)this.configProvider.get());
+        return newInstance((MetricRegistry) this.registryProvider.get(),
+                (MetricApplicationConfiguration) this.configProvider.get());
     }
 
-    public static MetricHolder_Factory create(Provider<MetricRegistry> registryProvider, Provider<MetricApplicationConfiguration> configProvider) {
+    public static MetricHolder_Factory create(Provider<MetricRegistry> registryProvider,
+            Provider<MetricApplicationConfiguration> configProvider) {
         return new MetricHolder_Factory(registryProvider, configProvider);
     }
 

@@ -77,7 +77,14 @@ public class ExtensionInitializer {
     final AppConnectionListener appConnectionListener;
 
     @Inject
-    public ExtensionInitializer(@NotNull EventRegistry eventRegistry, @NotNull InitializerRegistry initializerRegistry, @NotNull MetricRegistry metricRegistry, @NotNull MetricApplicationConfiguration multiTenancyConfiguration, @NotNull MetricPubAckInboundInterceptor pubAckInboundInterceptor, @NotNull MetricPublishInboundInterceptor inboundInterceptor, @NotNull MetricPublishReceiveInterceptor receiveInterceptor, @NotNull MetricPubAckOutboundInterceptor pubAckReceiveInterceptor, @NotNull MetricSubAckInterceptor subscribeInterceptor, @NotNull AppConnectionListener appConnectionListener) {
+    public ExtensionInitializer(@NotNull EventRegistry eventRegistry, @NotNull InitializerRegistry initializerRegistry,
+            @NotNull MetricRegistry metricRegistry, @NotNull MetricApplicationConfiguration multiTenancyConfiguration,
+            @NotNull MetricPubAckInboundInterceptor pubAckInboundInterceptor,
+            @NotNull MetricPublishInboundInterceptor inboundInterceptor,
+            @NotNull MetricPublishReceiveInterceptor receiveInterceptor,
+            @NotNull MetricPubAckOutboundInterceptor pubAckReceiveInterceptor,
+            @NotNull MetricSubAckInterceptor subscribeInterceptor,
+            @NotNull AppConnectionListener appConnectionListener) {
         this.eventRegistry = eventRegistry;
         this.initializerRegistry = initializerRegistry;
         this.configuration = multiTenancyConfiguration;
@@ -92,14 +99,15 @@ public class ExtensionInitializer {
 
     public void start() {
         ClientInitializer clientInitializer = (initializerInput, clientContext) -> {
-            clientContext.addPubackInboundInterceptor((PubackInboundInterceptor)this.pubAckInboundInterceptor);
-            clientContext.addPublishInboundInterceptor((PublishInboundInterceptor)this.inboundInterceptor);
-            clientContext.addPublishOutboundInterceptor((PublishOutboundInterceptor)this.receiveInterceptor);
-            clientContext.addPubackOutboundInterceptor((PubackOutboundInterceptor)this.pubAckReceiveInterceptor);
-            clientContext.addSubackOutboundInterceptor((SubackOutboundInterceptor)this.subscribeInterceptor);
+            clientContext.addPubackInboundInterceptor((PubackInboundInterceptor) this.pubAckInboundInterceptor);
+            clientContext.addPublishInboundInterceptor((PublishInboundInterceptor) this.inboundInterceptor);
+            clientContext.addPublishOutboundInterceptor((PublishOutboundInterceptor) this.receiveInterceptor);
+            clientContext.addPubackOutboundInterceptor((PubackOutboundInterceptor) this.pubAckReceiveInterceptor);
+            clientContext.addSubackOutboundInterceptor((SubackOutboundInterceptor) this.subscribeInterceptor);
         };
         this.initializerRegistry.setClientInitializer(clientInitializer);
-        this.eventRegistry.setClientLifecycleEventListener(clientLifecycleEventListenerProviderInput -> this.appConnectionListener);
+        this.eventRegistry.setClientLifecycleEventListener(
+                clientLifecycleEventListenerProviderInput -> this.appConnectionListener);
         log.info("Registered application instantx metrics enforcing interceptors");
     }
 

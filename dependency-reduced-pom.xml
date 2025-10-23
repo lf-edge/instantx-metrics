@@ -236,19 +236,10 @@
   </dependencies>
   <properties>
     <output.dir>${basedir}</output.dir>
-    <sonar.projectName>HiveExtensionMetric</sonar.projectName>
-    <sonar.sourceEncoding>UTF-8</sonar.sourceEncoding>
     <asciidoctor.version>1.5.7.1</asciidoctor.version>
-    <sonar.token>sqa_3332e2c6faf44763402382e7b2735e3098719c5d</sonar.token>
-    <sonar.host.url>http://localhost:9000</sonar.host.url>
-    <sonar.sources>.</sonar.sources>
     <extension.name>HiveMQ Metrics Extension</extension.name>
-    <source.document.name>README.adoc</source.document.name>
-    <sonar.verbose>true</sonar.verbose>
-    <sonar.projectKey>HiveExtensionMetric</sonar.projectKey>
-    <sonar.projectBaseDir>.</sonar.projectBaseDir>
-    <sonar.java.binaries>target/classes</sonar.java.binaries>
     <extension.author>InstantX</extension.author>
     <license.licenseName>apache_v2</license.licenseName>
+    <source.document.name>README.adoc</source.document.name>
   </properties>
 </project>

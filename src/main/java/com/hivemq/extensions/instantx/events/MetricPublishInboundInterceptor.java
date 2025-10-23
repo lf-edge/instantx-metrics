@@ -43,15 +43,21 @@ public class MetricPublishInboundInterceptor implements PublishInboundIntercepto
 
     public void onInboundPublish(@NotNull PublishInboundInput input, @NotNull PublishInboundOutput output) {
         String topic = input.getPublishPacket().getTopic();
-        String appAlias = this.metricHolder.getAppName((ClientBasedInput)input);
+        String appAlias = this.metricHolder.getAppName((ClientBasedInput) input);
         String clientId = input.getClientInformation().getClientId();
         if (this.metricHolder.isPublicMessage(topic)) {
-            this.metricHolder.getAppPublicPublishCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias).inc();
-            this.metricHolder.getAppPublicPublishByTypeCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias, topic).inc();
+            this.metricHolder.getAppPublicPublishCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias)
+                    .inc();
+            this.metricHolder
+                    .getAppPublicPublishByTypeCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias, topic)
+                    .inc();
             log.debug("App {} public msg publish, topic {}, clientId {}.", new Object[] { appAlias, topic, clientId });
         } else {
-            this.metricHolder.getAppPrivatePublishCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias).inc();
-            this.metricHolder.getAppPrivatePublishByTypeCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias, topic).inc();
+            this.metricHolder.getAppPrivatePublishCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias)
+                    .inc();
+            this.metricHolder
+                    .getAppPrivatePublishByTypeCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias, topic)
+                    .inc();
             log.debug("App {} private msg publish, topic {}, clientId {}.", new Object[] { appAlias, topic, clientId });
         }
     }

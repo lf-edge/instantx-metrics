@@ -53,7 +53,7 @@ public class HiveMQBindingsModule {
     @Singleton
     @NotNull
     ExecutorService provideExecutorService() {
-        return (ExecutorService)Services.extensionExecutorService();
+        return (ExecutorService) Services.extensionExecutorService();
     }
 
     @Provides
@@ -74,7 +74,7 @@ public class HiveMQBindingsModule {
     @Singleton
     @NotNull
     ScheduledExecutorService provideScheduledExecutorService() {
-        return (ScheduledExecutorService)Services.extensionExecutorService();
+        return (ScheduledExecutorService) Services.extensionExecutorService();
     }
 
     @Provides

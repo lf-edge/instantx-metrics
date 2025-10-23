@@ -25,7 +25,8 @@ import dagger.internal.Preconditions;
 import java.util.concurrent.ScheduledExecutorService;
 
 @DaggerGenerated
-public final class HiveMQBindingsModule_ProvideScheduledExecutorServiceFactory implements Factory<ScheduledExecutorService> {
+public final class HiveMQBindingsModule_ProvideScheduledExecutorServiceFactory
+        implements Factory<ScheduledExecutorService> {
     private final HiveMQBindingsModule module;
 
     public HiveMQBindingsModule_ProvideScheduledExecutorServiceFactory(HiveMQBindingsModule module) {
@@ -41,6 +42,7 @@ public final class HiveMQBindingsModule_ProvideScheduledExecutorServiceFactory i
     }
 
     public static ScheduledExecutorService provideScheduledExecutorService(HiveMQBindingsModule instance) {
-        return (ScheduledExecutorService)Preconditions.checkNotNullFromProvides(instance.provideScheduledExecutorService());
+        return (ScheduledExecutorService) Preconditions
+                .checkNotNullFromProvides(instance.provideScheduledExecutorService());
     }
 }

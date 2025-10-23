@@ -41,6 +41,6 @@ public final class HiveMQBindingsModule_ProvideExtensionHomeFolderFactory implem
     }
 
     public static File provideExtensionHomeFolder(HiveMQBindingsModule instance) {
-        return (File)Preconditions.checkNotNullFromProvides(instance.provideExtensionHomeFolder());
+        return (File) Preconditions.checkNotNullFromProvides(instance.provideExtensionHomeFolder());
     }
 }

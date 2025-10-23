@@ -43,17 +43,19 @@ public class MetricPubAckOutboundInterceptor implements PubackOutboundIntercepto
     }
 
     public void onOutboundPuback(@NotNull PubackOutboundInput input, @NotNull PubackOutboundOutput output) {
-        String appAlias = this.metricHolder.getAppName((ClientBasedInput)input);
+        String appAlias = this.metricHolder.getAppName((ClientBasedInput) input);
         AckReasonCode code = input.getPubackPacket().getReasonCode();
         String clientId = input.getClientInformation().getClientId();
         if (AckReasonCode.NOT_AUTHORIZED == code) {
-            this.metricHolder.getAppPublishUnauthorizedCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias).inc();
+            this.metricHolder.getAppPublishUnauthorizedCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias)
+                    .inc();
             log.debug("App {} ack unauthorized publish, clientId {}.", appAlias, clientId);
         } else if (AckReasonCode.SUCCESS == code) {
-            this.metricHolder.getAppPubAckCount(appAlias.equalsIgnoreCase("unknown")?clientId:appAlias).inc();
+            this.metricHolder.getAppPubAckCount(appAlias.equalsIgnoreCase("unknown") ? clientId : appAlias).inc();
             log.debug("App {} ack msg publish success, clientId {}.", appAlias, clientId);
         } else {
-            log.debug("App {} ack msg publish failed, reason {}, clientId {}.", new Object[] { appAlias, code, clientId });
+            log.debug("App {} ack msg publish failed, reason {}, clientId {}.",
+                    new Object[] { appAlias, code, clientId });
         }
     }
 }
